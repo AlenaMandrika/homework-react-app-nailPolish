@@ -14,26 +14,32 @@ const nailPolishes = [
   {
     _id: 1,
     featured: false,
+    hidden: false,
     name: 'nail polish brawn',
     thumbnail: nailPolishBrawn,
     price: 9,
-    stock: 'in stock'
+    stock: 'in stock',
+    description: 'description nail polish brawn'
   },
   {
     _id: 2,
     featured: false,
+    hidden: false,
     name: 'nail polish burgundy',
     thumbnail: nailPolishBurgundy,
     price: 7,
-    stock: 'in stock'
+    stock: 'in stock',
+    description: 'description nail polish burgundy'
   },
   {
     _id: 3,
     featured: true,
+    hidden: false,
     name: 'nail polish scarlet',
     thumbnail: nailPolishScarlet,
     price: 5,
-    stock: 'in stock'
+    stock: 'in stock',
+    description: 'description nail polish scarlet'
   }
 ]
 
@@ -45,6 +51,7 @@ class App extends Component {
     }
 
     this.toggleFeatured = this.toggleFeatured.bind(this)
+    this.toggleFeaturedEye = this.toggleFeaturedEye.bind(this)
   }
 
   componentDidMount () {
@@ -55,7 +62,7 @@ class App extends Component {
   }
 
   sortNailPolishes (nailPolishes) {
-    return _orderBy (nailPolishes, ['featured','name'], ['desc', 'asc'])
+    return _orderBy (nailPolishes, ['featured', 'name'], ['desc', 'asc'])
   }
 
   toggleFeatured (polishId) {
@@ -72,12 +79,26 @@ class App extends Component {
     })
   }
 
+  toggleFeaturedEye (polishId) {
+    const newNailPolishes = this.state.nailPolishes.map(nailPolish => {
+      if (nailPolish._id === polishId) return {
+        ...nailPolish,
+        hidden: !nailPolish.hidden,
+      }
+      return nailPolish
+    })
+    this.setState ({
+      nailPolishes: newNailPolishes
+    })
+  }
+
   render() {
     return (
       <div className='ui container'>
         <NailPolishList
           nailPolishes={this.state.nailPolishes}
           toggleFeatured={this.toggleFeatured}
+          toggleFeaturedEye={this.toggleFeaturedEye}
         />
       </div>
     );

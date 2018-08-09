@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import NailPolishCard from './NailPolishCard'
 
-const NailPolishList = ({ nailPolishes, toggleFeatured }) => {
+const NailPolishList = ({ nailPolishes, toggleFeatured, toggleFeaturedEye }) => {
   return (
     <div className='ui four cards'>
       {
@@ -16,7 +16,12 @@ const NailPolishList = ({ nailPolishes, toggleFeatured }) => {
             </div>
           </div>
           ) : (
-          nailPolishes.map(nailPolish => <NailPolishCard nailPolish={nailPolish} key={nailPolish._id} toggleFeatured={toggleFeatured}/>)
+          nailPolishes.map(nailPolish => <NailPolishCard
+            nailPolish={nailPolish}
+            key={nailPolish._id}
+            toggleFeatured={toggleFeatured}
+            toggleFeaturedEye={toggleFeaturedEye}
+          />)
         )
       }
     </div>
